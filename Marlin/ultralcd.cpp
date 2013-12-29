@@ -574,9 +574,9 @@ static void lcd_move_menu_axis()
     MENU_ITEM(back, MSG_MOVE_AXIS, lcd_move_menu);
     MENU_ITEM(submenu, "Move X", lcd_move_x);
     MENU_ITEM(submenu, "Move Y", lcd_move_y);
+    MENU_ITEM(submenu, "Move Z", lcd_move_z);
     if (move_menu_scale < 10.0)
     {
-        MENU_ITEM(submenu, "Move Z", lcd_move_z);
         MENU_ITEM(submenu, "Extruder", lcd_move_e);
     }
     END_MENU();
