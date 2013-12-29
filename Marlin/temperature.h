@@ -67,6 +67,7 @@ extern float current_temperature_bed;
 #endif
 
 extern int temp_sensor_offset;
+extern float temp_sensor_gain;
   
 //high level conversion routines, for use outside of temperature.cpp
 //inline so that there is no performance decrease.

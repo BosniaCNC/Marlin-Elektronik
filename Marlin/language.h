@@ -139,6 +139,7 @@
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
     #define MSG_TEMPERATURE_OFFSET "Temp offset"
+    #define MSG_TEMPERATURE_GAIN "Temp gain"    
 
 // Serial Console Messages
 

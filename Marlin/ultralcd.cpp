@@ -669,6 +669,7 @@ static void lcd_control_temperature_menu()
     MENU_ITEM(submenu, MSG_PREHEAT_PLA_SETTINGS, lcd_control_temperature_preheat_pla_settings_menu);
     MENU_ITEM(submenu, MSG_PREHEAT_ABS_SETTINGS, lcd_control_temperature_preheat_abs_settings_menu);
     MENU_ITEM_EDIT(int3, MSG_TEMPERATURE_OFFSET, &temp_sensor_offset, -20, 20);
+    MENU_ITEM_EDIT(float32, MSG_TEMPERATURE_GAIN, &temp_sensor_gain, 0, 2);
     END_MENU();
 }
 
