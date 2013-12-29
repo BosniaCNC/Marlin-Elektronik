@@ -65,6 +65,8 @@ extern float current_temperature_bed;
 #ifdef BABYSTEPPING
   extern volatile int babystepsTodo[3];
 #endif
+
+extern int temp_sensor_offset;
   
 //high level conversion routines, for use outside of temperature.cpp
 //inline so that there is no performance decrease.

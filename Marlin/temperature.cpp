@@ -37,6 +37,7 @@
 //===========================================================================
 //=============================public variables============================
 //===========================================================================
+int temp_sensor_offset = TEMP_SENSOR_AD595_OFFSET;
 int target_temperature[EXTRUDERS] = { 0 };
 int target_temperature_bed = 0;
 int current_temperature_raw[EXTRUDERS] = { 0 };
@@ -639,7 +640,7 @@ static float analog2temp(int raw, uint8_t e) {
 
     return celsius;
   }
-  return ((raw * ((5.0 * 100.0) / 1024.0) / OVERSAMPLENR) * TEMP_SENSOR_AD595_GAIN) + TEMP_SENSOR_AD595_OFFSET;
+  return ((raw * ((5.0 * 100.0) / 1024.0) / OVERSAMPLENR) * TEMP_SENSOR_AD595_GAIN) + temp_sensor_offset;
 }
 
 // Derived from RepRap FiveD extruder::getTemperature()

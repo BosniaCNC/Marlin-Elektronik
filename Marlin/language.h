@@ -109,7 +109,7 @@
 	#define MSG_TEMPERATURE "Temperature"
 	#define MSG_MOTION "Motion"
 	#define MSG_CONTRAST "LCD contrast"
-	#define MSG_STORE_EPROM "Store memory"
+	#define MSG_STORE_EPROM "Save memory"
 	#define MSG_LOAD_EPROM "Load memory"
 	#define MSG_RESTORE_FAILSAFE "Restore Failsafe"
 	#define MSG_REFRESH "Refresh"
@@ -138,6 +138,7 @@
 	#define MSG_CNG_SDCARD "Change SD-Card"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_TEMPERATURE_OFFSET "Temp offset"
 
 // Serial Console Messages
 

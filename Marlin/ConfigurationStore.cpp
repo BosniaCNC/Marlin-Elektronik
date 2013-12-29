@@ -37,7 +37,7 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 // the default values are used whenever there is a change to the data, to prevent
 // wrong data being written to the variables.
 // ALSO:  always make sure the variables in the Store and retrieve sections are in the same order.
-#define EEPROM_VERSION "V09"
+#define EEPROM_VERSION "V10"
 
 #ifdef EEPROM_SETTINGS
 void Config_StoreSettings() 
@@ -85,6 +85,7 @@ void Config_StoreSettings()
     int lcd_contrast = 32;
   #endif
   EEPROM_WRITE_VAR(i,lcd_contrast);
+  EEPROM_WRITE_VAR(i,temp_sensor_offset);  
   char ver2[4]=EEPROM_VERSION;
   i=EEPROM_OFFSET;
   EEPROM_WRITE_VAR(i,ver2); // validate data
@@ -166,6 +167,11 @@ void Config_PrintSettings()
     SERIAL_ECHOPAIR(" D" ,unscalePID_d(Kd));
     SERIAL_ECHOLN(""); 
 #endif
+    SERIAL_ECHO_START;
+    SERIAL_ECHOLNPGM("Temperature settings:");
+    SERIAL_ECHO_START;
+    SERIAL_ECHOPAIR("Temperature offset",temp_sensor_offset * 1.0f); 
+    SERIAL_ECHOLN(""); 
 } 
 #endif
 
@@ -221,7 +227,7 @@ void Config_RetrieveSettings()
         int lcd_contrast;
         #endif
         EEPROM_READ_VAR(i,lcd_contrast);
-
+		EEPROM_READ_VAR(i,temp_sensor_offset);
 		// Call updatePID (similar to when we have processed M301)
 		updatePID();
         SERIAL_ECHO_START;
@@ -272,6 +278,7 @@ void Config_ResetDefault()
     absPreheatHPBTemp = ABS_PREHEAT_HPB_TEMP;
     absPreheatFanSpeed = ABS_PREHEAT_FAN_SPEED;
 #endif
+    temp_sensor_offset = TEMP_SENSOR_AD595_OFFSET;
 #ifdef DOGLCD
     lcd_contrast = DEFAULT_LCD_CONTRAST;
 #endif

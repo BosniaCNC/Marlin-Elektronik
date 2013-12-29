@@ -668,6 +668,7 @@ static void lcd_control_temperature_menu()
 #endif//PIDTEMP
     MENU_ITEM(submenu, MSG_PREHEAT_PLA_SETTINGS, lcd_control_temperature_preheat_pla_settings_menu);
     MENU_ITEM(submenu, MSG_PREHEAT_ABS_SETTINGS, lcd_control_temperature_preheat_abs_settings_menu);
+    MENU_ITEM_EDIT(int3, MSG_TEMPERATURE_OFFSET, &temp_sensor_offset, -20, 20);
     END_MENU();
 }
 
@@ -1346,16 +1347,13 @@ char *itostr31(const int &xx)
 
 char *itostr3(const int &xx)
 {
-  if (xx >= 100)
-    conv[0]=(xx/100)%10+'0';
-  else
-    conv[0]=' ';
-  if (xx >= 10)
-    conv[1]=(xx/10)%10+'0';
-  else
-    conv[1]=' ';
-  conv[2]=(xx)%10+'0';
-  conv[3]=0;
+  conv[0]=(xx>=0)?' ':'-';
+  int xy=(xx>=0)?xx:-xx;
+  conv[1]=(xy>=100)?(xy/100)%10+'0':' '; 
+  conv[2]=(xy>=10)?(xy/10)%10+'0':' ';
+  conv[3]=(xy)%10+'0';
+  conv[4]=0;
+  
   return conv;
 }
 
