@@ -360,6 +360,22 @@ void setup_killpin()
   #endif
 }
 
+void setup_abortpin()
+{
+  #if defined(ABORT_PIN) && ABORT_PIN > -1
+    pinMode(ABORT_PIN,INPUT);
+    WRITE(ABORT_PIN,HIGH);
+  #endif
+}
+
+void disable_abortpin()
+{
+  #if defined(ABORT_PIN) && ABORT_PIN > -1
+    WRITE(ABORT_PIN,LOW);
+  #endif
+}
+
+
 void setup_photpin()
 {
   #if defined(PHOTOGRAPH_PIN) && PHOTOGRAPH_PIN > -1
@@ -429,6 +445,7 @@ void servo_init()
 void setup()
 {
   setup_killpin();
+  setup_abortpin();
   setup_powerhold();
   MYSERIAL.begin(BAUDRATE);
   SERIAL_PROTOCOLLNPGM("start");
@@ -3276,6 +3293,12 @@ void manage_inactivity()
     if( 0 == READ(KILL_PIN) )
       kill();
   #endif
+  
+  #if defined(ABORT_PIN) && ABORT_PIN > -1
+    if( 0 == READ(ABORT_PIN) )
+      abort();
+  #endif
+  
   #if defined(CONTROLLERFAN_PIN) && CONTROLLERFAN_PIN > -1
     controllerFan(); //Check if fan should be turned on to cool stepper drivers down
   #endif
@@ -3346,6 +3369,25 @@ void Stop()
     SERIAL_ERRORLNPGM(MSG_ERR_STOPPED);
     LCD_MESSAGEPGM(MSG_STOPPED);
   }
+}
+
+// Stops printing and lowers the Z-axis by 10 mm
+void abort()
+{
+  float manual_feedrate[] = MANUAL_FEEDRATE;
+  disable_abortpin();
+  
+  quickStop();
+  
+  SERIAL_ERROR_START;
+  SERIAL_ERRORLNPGM(MSG_ERR_ABORTED);
+  LCD_MESSAGEPGM(MSG_ABORTED);
+
+  current_position[Z_AXIS] += 10;
+  plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS],  manual_feedrate[Z_AXIS]/60, active_extruder);
+  
+  delay(1000);
+  setup_abortpin();
 }
 
 bool IsStopped() { return Stopped; };

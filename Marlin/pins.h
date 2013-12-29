@@ -1182,6 +1182,7 @@
 #define PS_ON_PIN          12
 #define KILL_PIN           -1
 #define SUICIDE_PIN        54  //PIN that has to be turned on right after start, to keep power flowing.
+#define ABORT_PIN          15
 
 #ifdef ULTRA_LCD
 

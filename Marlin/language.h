@@ -136,10 +136,11 @@
 	#define MSG_FILAMENTCHANGE "Change filament"
 	#define MSG_INIT_SDCARD "Init. SD-Card"	
 	#define MSG_CNG_SDCARD "Change SD-Card"
-    #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
-    #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
-    #define MSG_TEMPERATURE_OFFSET "Temp offset"
-    #define MSG_TEMPERATURE_GAIN "Temp gain"    
+  #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
+  #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+  #define MSG_TEMPERATURE_OFFSET "Temp offset"
+  #define MSG_TEMPERATURE_GAIN "Temp gain"   
+  #define MSG_ABORTED "A B O R T E D" 
 
 // Serial Console Messages
 
@@ -211,6 +212,7 @@
 	#define MSG_ENDSTOPS_HIT "endstops hit: "
 	#define MSG_ERR_COLD_EXTRUDE_STOP " cold extrusion prevented"
 	#define MSG_ERR_LONG_EXTRUDE_STOP " too long extrusion prevented"
+	#define MSG_ERR_ABORTED "Print manually aborted"
 
 #endif
 
