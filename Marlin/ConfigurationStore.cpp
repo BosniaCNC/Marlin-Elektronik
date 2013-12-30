@@ -37,7 +37,7 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 // the default values are used whenever there is a change to the data, to prevent
 // wrong data being written to the variables.
 // ALSO:  always make sure the variables in the Store and retrieve sections are in the same order.
-#define EEPROM_VERSION "V11"
+#define EEPROM_VERSION "V12"
 
 #ifdef EEPROM_SETTINGS
 void Config_StoreSettings() 
@@ -87,6 +87,7 @@ void Config_StoreSettings()
   EEPROM_WRITE_VAR(i,lcd_contrast);
   EEPROM_WRITE_VAR(i,temp_sensor_offset);  
   EEPROM_WRITE_VAR(i,temp_sensor_gain);  
+  EEPROM_WRITE_VAR(i,abort_on_endstop_hit);  
   char ver2[4]=EEPROM_VERSION;
   i=EEPROM_OFFSET;
   EEPROM_WRITE_VAR(i,ver2); // validate data
@@ -157,6 +158,7 @@ void Config_PrintSettings()
     SERIAL_ECHOPAIR("  M666 X",endstop_adj[0] );
     SERIAL_ECHOPAIR(" Y" ,endstop_adj[1] );
     SERIAL_ECHOPAIR(" Z" ,endstop_adj[2] );
+    SERIAL_ECHOPAIR(" Abort on hit" ,abort_on_endstop_hit );
     SERIAL_ECHOLN("");
 #endif
 #ifdef PIDTEMP
@@ -231,6 +233,7 @@ void Config_RetrieveSettings()
         EEPROM_READ_VAR(i,lcd_contrast);
 		EEPROM_READ_VAR(i,temp_sensor_offset);
 		EEPROM_READ_VAR(i,temp_sensor_gain);
+		EEPROM_READ_VAR(i,abort_on_endstop_hit);
 		// Call updatePID (similar to when we have processed M301)
 		updatePID();
         SERIAL_ECHO_START;
@@ -283,6 +286,7 @@ void Config_ResetDefault()
 #endif
     temp_sensor_offset = TEMP_SENSOR_AD595_OFFSET;
     temp_sensor_gain = TEMP_SENSOR_AD595_GAIN;
+    abort_on_endstop_hit = false;
 #ifdef DOGLCD
     lcd_contrast = DEFAULT_LCD_CONTRAST;
 #endif
