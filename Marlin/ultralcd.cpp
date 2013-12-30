@@ -77,6 +77,7 @@ static void menu_action_setting_edit_float32(const char* pstr, float* ptr, float
 static void menu_action_setting_edit_float5(const char* pstr, float* ptr, float minValue, float maxValue);
 static void menu_action_setting_edit_float51(const char* pstr, float* ptr, float minValue, float maxValue);
 static void menu_action_setting_edit_float52(const char* pstr, float* ptr, float minValue, float maxValue);
+static void menu_action_setting_edit_float53(const char* pstr, float* ptr, float minValue, float maxValue);
 static void menu_action_setting_edit_long5(const char* pstr, unsigned long* ptr, unsigned long minValue, unsigned long maxValue);
 static void menu_action_setting_edit_callback_bool(const char* pstr, bool* ptr, menuFunc_t callbackFunc);
 static void menu_action_setting_edit_callback_int3(const char* pstr, int* ptr, int minValue, int maxValue, menuFunc_t callbackFunc);
@@ -85,6 +86,7 @@ static void menu_action_setting_edit_callback_float32(const char* pstr, float* p
 static void menu_action_setting_edit_callback_float5(const char* pstr, float* ptr, float minValue, float maxValue, menuFunc_t callbackFunc);
 static void menu_action_setting_edit_callback_float51(const char* pstr, float* ptr, float minValue, float maxValue, menuFunc_t callbackFunc);
 static void menu_action_setting_edit_callback_float52(const char* pstr, float* ptr, float minValue, float maxValue, menuFunc_t callbackFunc);
+static void menu_action_setting_edit_callback_float53(const char* pstr, float* ptr, float minValue, float maxValue, menuFunc_t callbackFunc);
 static void menu_action_setting_edit_callback_long5(const char* pstr, unsigned long* ptr, unsigned long minValue, unsigned long maxValue, menuFunc_t callbackFunc);
 
 #define ENCODER_FEEDRATE_DEADZONE 10
@@ -669,7 +671,7 @@ static void lcd_control_temperature_menu()
     MENU_ITEM(submenu, MSG_PREHEAT_PLA_SETTINGS, lcd_control_temperature_preheat_pla_settings_menu);
     MENU_ITEM(submenu, MSG_PREHEAT_ABS_SETTINGS, lcd_control_temperature_preheat_abs_settings_menu);
     MENU_ITEM_EDIT(int3, MSG_TEMPERATURE_OFFSET, &temp_sensor_offset, -20, 20);
-    MENU_ITEM_EDIT(float32, MSG_TEMPERATURE_GAIN, &temp_sensor_gain, 0, 2);
+    MENU_ITEM_EDIT(float53, MSG_TEMPERATURE_GAIN, &temp_sensor_gain, 0, 2);
     END_MENU();
 }
 
@@ -893,6 +895,7 @@ menu_edit_type(float, float32, ftostr32, 100)
 menu_edit_type(float, float5, ftostr5, 0.01)
 menu_edit_type(float, float51, ftostr51, 10)
 menu_edit_type(float, float52, ftostr52, 100)
+menu_edit_type(float, float53, ftostr53, 1000)
 menu_edit_type(unsigned long, long5, ftostr5, 0.01)
 
 #ifdef REPRAPWORLD_KEYPAD
@@ -1317,6 +1320,7 @@ char *ftostr31ns(const float &x)
   return conv;
 }
 
+//  convert float to string with 123.45 format
 char *ftostr32(const float &x)
 {
   long xx=x*100;
@@ -1451,6 +1455,22 @@ char *ftostr52(const float &x)
   conv[2]=(xx/1000)%10+'0';
   conv[3]=(xx/100)%10+'0';
   conv[4]='.';
+  conv[5]=(xx/10)%10+'0';
+  conv[6]=(xx)%10+'0';
+  conv[7]=0;
+  return conv;
+}
+
+//  convert float to string with +12.345 format
+char *ftostr53(const float &x)
+{
+  long xx=x*1000; // 12345
+  conv[0]=(xx>=0)?'+':'-'; 
+  xx=abs(xx);
+  conv[1]=(xx/10000)%10+'0';
+  conv[2]=(xx/1000)%10+'0';
+  conv[3]='.';  
+  conv[4]=(xx/100)%10+'0';
   conv[5]=(xx/10)%10+'0';
   conv[6]=(xx)%10+'0';
   conv[7]=0;
