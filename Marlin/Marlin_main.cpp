@@ -3377,7 +3377,22 @@ void abort()
   float manual_feedrate[] = MANUAL_FEEDRATE;
   disable_abortpin();
   
-  quickStop();
+  disable_heater();
+  
+  if (card.cardOK && card.isFileOpen() && card.sdprinting)
+  {
+    card.sdprinting = false;
+    card.closefile();
+  }
+ 
+  quickStop(); 
+  
+  if (SD_FINISHED_STEPPERRELEASE) 
+  {  
+    enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+  }
+
+  autotempShutdown();
   
   SERIAL_ERROR_START;
   SERIAL_ERRORLNPGM(MSG_ERR_ABORTED);
