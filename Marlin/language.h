@@ -23,7 +23,7 @@
 
 #define PROTOCOL_VERSION "1.0"
 
-#if MOTHERBOARD == 7 || MOTHERBOARD == 71
+#if MOTHERBOARD == 7 || MOTHERBOARD == 71 || MOTHERBOARD == 72
 	#define MACHINE_NAME "Troublemaker"
 	#define FIRMWARE_URL "http://firmware.ultimaker.com"
 #elif MOTHERBOARD == 80
@@ -141,7 +141,7 @@
   #define MSG_TEMPERATURE_OFFSET "Temp offset"
   #define MSG_TEMPERATURE_GAIN "Temp gain"   
   #define MSG_ABORTED "A B O R T E D" 
-
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 // Serial Console Messages
 
 	#define MSG_Enqueing "enqueing \""
@@ -166,6 +166,7 @@
 	#define MSG_END_FILE_LIST "End file list"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Invalid extruder "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Invalid extruder "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Invalid extruder "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Invalid extruder "
 	#define MSG_ERR_NO_THERMISTORS "No thermistors - no temperature"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Invalid extruder "
@@ -309,6 +310,7 @@
 	#define MSG_CNG_SDCARD "Change SD-Card"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 // Serial Console Messages
 
@@ -334,6 +336,7 @@
 	#define MSG_END_FILE_LIST "Koniec listy plikow"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Niepoprawny ekstruder "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Niepoprawny ekstruder "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Niepoprawny ekstruder "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Niepoprawny ekstruder "
 	#define MSG_ERR_NO_THERMISTORS "Brak termistorow - brak temperatury :("
 	#define MSG_M109_INVALID_EXTRUDER "M109 Niepoprawny ekstruder "
@@ -475,6 +478,7 @@
 	#define MSG_CNG_SDCARD "Changer de carte SD"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 // Serial Console Messages
 
@@ -500,6 +504,7 @@
 	#define MSG_END_FILE_LIST "Fin de la liste de fichiers"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Extruder invalide"
 	#define MSG_M105_INVALID_EXTRUDER "M105 Extruder invalide"
+	#define MSG_M200_INVALID_EXTRUDER "M200 Extruder invalide"
 	#define MSG_M218_INVALID_EXTRUDER "M218 Extruder invalide"
 	#define MSG_ERR_NO_THERMISTORS "Pas de thermistor, pas de temperature"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Extruder invalide "
@@ -644,6 +649,7 @@
 	#define MSG_CNG_SDCARD "Change SD-Card"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 	
 // Serial Console Messages
 
@@ -669,6 +675,7 @@
 	#define MSG_END_FILE_LIST "End file list"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Invalid extruder "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Invalid extruder "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Invalid extruder "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Invalid extruder "
 	#define MSG_ERR_NO_THERMISTORS "No thermistors - no temp"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Invalid extruder "
@@ -817,6 +824,7 @@
 	#define MSG_STEPPER_RELEASED "Desacoplada."
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 // Serial Console Messages
 
@@ -842,6 +850,7 @@
 	#define MSG_END_FILE_LIST "Fin de la lista de archivos"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Extrusor Invalido "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Extrusor Invalido "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Extrusor Invalido "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Extrusor Invalido "
 	#define MSG_ERR_NO_THERMISTORS "No hay termistores - no temp"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Extrusor Invalido "
@@ -980,6 +989,7 @@
 	#define MSG_CNG_SDCARD "Change SD-Card"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 // Serial Console Messages
 
@@ -1005,6 +1015,7 @@
 	#define MSG_END_FILE_LIST					"Конец списка файлов"
 	#define MSG_M104_INVALID_EXTRUDER			"M104 ошибка экструдера "
 	#define MSG_M105_INVALID_EXTRUDER			"M105 ошибка экструдера "
+	#define MSG_M200_INVALID_EXTRUDER			"M200 ошибка экструдера "
 	#define MSG_M218_INVALID_EXTRUDER			"M218 ошибка экструдера "
 	#define MSG_ERR_NO_THERMISTORS				"Нет термистра - нет температуры"
 	#define MSG_M109_INVALID_EXTRUDER			"M109 ошибка экструдера "
@@ -1143,6 +1154,7 @@
 	#define MSG_CNG_SDCARD           "Cambia SD-Card"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 	// Serial Console Messages
 
@@ -1168,6 +1180,7 @@
 	#define MSG_END_FILE_LIST        "Fine Lista File"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Estrusore non valido "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Estrusore non valido "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Estrusore non valido "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Estrusore non valido "
 	#define MSG_ERR_NO_THERMISTORS   "Nessun Termistore - nessuna temperatura"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Estrusore non valido "
@@ -1315,6 +1328,7 @@
 	#define MSG_CNG_SDCARD "Change SD-Card"
     #define MSG_ZPROBE_OUT "Sonda fora da mesa"
     #define MSG_POSITION_UNKNOWN "Home X/Y antes de Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 // Serial Console Messages
 
@@ -1340,6 +1354,7 @@
 	#define MSG_END_FILE_LIST "Fim da lista de arquivos"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Extrusor inválido "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Extrusor inválido "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Extrusor inválido "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Extrusor inválido "
 	#define MSG_ERR_NO_THERMISTORS "Nao ha termistor - no temp"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Extrusor inválido "
@@ -1483,6 +1498,7 @@
 	#define MSG_CNG_SDCARD "Change SD-Card"
     #define MSG_ZPROBE_OUT "ZProbe Outside Bed"
     #define MSG_POSITION_UNKNOWN "Home X/Y before Z"
+    #define MSG_ZPROBE_ZOFFSET "Z Offset"
 
 // Serial Console Messages
 
@@ -1508,6 +1524,7 @@
 	#define MSG_END_FILE_LIST "Tiedostolistauksen loppu"
 	#define MSG_M104_INVALID_EXTRUDER "M104 Virheellinen suutin "
 	#define MSG_M105_INVALID_EXTRUDER "M105 Virheellinen suutin "
+	#define MSG_M200_INVALID_EXTRUDER "M200 Virheellinen suutin "
 	#define MSG_M218_INVALID_EXTRUDER "M218 Virheellinen suutin "
 	#define MSG_ERR_NO_THERMISTORS "Ei termistoreja - ei lampotiloja"
 	#define MSG_M109_INVALID_EXTRUDER "M109 Virheellinen suutin "

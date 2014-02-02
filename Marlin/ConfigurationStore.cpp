@@ -37,7 +37,7 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 // the default values are used whenever there is a change to the data, to prevent
 // wrong data being written to the variables.
 // ALSO:  always make sure the variables in the Store and retrieve sections are in the same order.
-#define EEPROM_VERSION "V12"
+#define EEPROM_VERSION "V13"
 
 #ifdef EEPROM_SETTINGS
 void Config_StoreSettings() 
@@ -88,6 +88,7 @@ void Config_StoreSettings()
   EEPROM_WRITE_VAR(i,temp_sensor_offset);  
   EEPROM_WRITE_VAR(i,temp_sensor_gain);  
   EEPROM_WRITE_VAR(i,abort_on_endstop_hit);  
+  EEPROM_WRITE_VAR(i,zprobe_zoffset);
   char ver2[4]=EEPROM_VERSION;
   i=EEPROM_OFFSET;
   EEPROM_WRITE_VAR(i,ver2); // validate data
@@ -234,6 +235,7 @@ void Config_RetrieveSettings()
 		EEPROM_READ_VAR(i,temp_sensor_offset);
 		EEPROM_READ_VAR(i,temp_sensor_gain);
 		EEPROM_READ_VAR(i,abort_on_endstop_hit);
+        EEPROM_READ_VAR(i,zprobe_zoffset);
 		// Call updatePID (similar to when we have processed M301)
 		updatePID();
         SERIAL_ECHO_START;
@@ -283,6 +285,9 @@ void Config_ResetDefault()
     absPreheatHotendTemp = ABS_PREHEAT_HOTEND_TEMP;
     absPreheatHPBTemp = ABS_PREHEAT_HPB_TEMP;
     absPreheatFanSpeed = ABS_PREHEAT_FAN_SPEED;
+#endif
+#ifdef ENABLE_AUTO_BED_LEVELING
+    zprobe_zoffset = -Z_PROBE_OFFSET_FROM_EXTRUDER;
 #endif
     temp_sensor_offset = TEMP_SENSOR_AD595_OFFSET;
     temp_sensor_gain = TEMP_SENSOR_AD595_GAIN;
