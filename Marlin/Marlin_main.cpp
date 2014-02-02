@@ -2609,6 +2609,53 @@ void process_commands()
         Config_PrintSettings();
     }
     break;
+    case 530: // M530 Read port J and F pins values
+    {
+        //SERIAL_PROTOCOL((int)PINJ);
+        //SERIAL_PROTOCOLLN("");
+        //SERIAL_PROTOCOL((int)PINF);
+        SERIAL_PROTOCOL((int)((PINJ << 8) | PINF));
+        SERIAL_PROTOCOLLN("");
+    }
+    break;    
+    case 531: // M531 P<value> - Write to port F and port J pins, respectively. Value is 32 bit number, two bits for each pin. First bit is high, second bit is low, both bits 0 means the pin is unchanged.
+    {
+      if(code_seen('P'))
+      {
+        long pin_values = code_value_long();
+        //SERIAL_PROTOCOL(pin_values);
+        //SERIAL_PROTOCOLLN("");
+        int port_f_raw = (pin_values & 0xFFFF);
+        //SERIAL_PROTOCOL(port_f_raw);
+        //SERIAL_PROTOCOLLN("");
+        int port_j_raw = (pin_values >> 16);
+        //SERIAL_PROTOCOL(port_j_raw);
+        //SERIAL_PROTOCOLLN("");        
+        int port_f = PINF;
+        //SERIAL_PROTOCOL(port_f);
+        //SERIAL_PROTOCOLLN("");              
+        int port_j = PINJ;
+        //SERIAL_PROTOCOL(port_j);
+        //SERIAL_PROTOCOLLN("");              
+        
+        for (int i = 0; i < 8; i++)
+        {
+          if (port_f_raw & (1 << (i * 2)))
+            port_f |= (1 << i);
+          else if (port_f_raw & (1 << ((i * 2) + 1)))
+            port_f &= ~(1 << i);
+        
+          if (port_j_raw & (1 << (i * 2)))
+            port_j |= (1 << i);
+          else if (port_j_raw & (1 << ((i * 2) + 1)))
+            port_j &= ~(1 << i);
+        }
+        
+        PORTF = port_f;
+        PORTJ = port_j;
+      }
+    }
+    break;        
     #ifdef ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
     case 540:
     {
