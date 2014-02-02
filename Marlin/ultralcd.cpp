@@ -554,7 +554,7 @@ static void lcd_move_e()
         calculate_delta(current_position);
         plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
         #else
-        plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+        plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], move_menu_scale == 10 ? manual_feedrate[E_AXIS] : manual_feedrate[E_AXIS]/60, active_extruder);
         #endif
         lcdDrawUpdate = 1;
     }
@@ -577,10 +577,8 @@ static void lcd_move_menu_axis()
     MENU_ITEM(submenu, "Move X", lcd_move_x);
     MENU_ITEM(submenu, "Move Y", lcd_move_y);
     MENU_ITEM(submenu, "Move Z", lcd_move_z);
-    if (move_menu_scale < 10.0)
-    {
-        MENU_ITEM(submenu, "Extruder", lcd_move_e);
-    }
+    MENU_ITEM(submenu, "Extruder", lcd_move_e);
+//    if (move_menu_scale < 10.0) ...
     END_MENU();
 }
 
