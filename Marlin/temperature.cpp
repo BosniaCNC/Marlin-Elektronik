@@ -641,6 +641,7 @@ static float analog2temp(int raw, uint8_t e) {
 
     return celsius;
   }
+  
   return ((raw * ((5.0 * 100.0) / 1024.0) / OVERSAMPLENR) * temp_sensor_gain) + temp_sensor_offset;
 }
 
