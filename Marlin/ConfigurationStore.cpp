@@ -232,9 +232,9 @@ void Config_RetrieveSettings()
         int lcd_contrast;
         #endif
         EEPROM_READ_VAR(i,lcd_contrast);
-		EEPROM_READ_VAR(i,temp_sensor_offset);
-		EEPROM_READ_VAR(i,temp_sensor_gain);
-		EEPROM_READ_VAR(i,abort_on_endstop_hit);
+        EEPROM_READ_VAR(i,temp_sensor_offset);
+        EEPROM_READ_VAR(i,temp_sensor_gain);
+        EEPROM_READ_VAR(i,abort_on_endstop_hit);
         EEPROM_READ_VAR(i,zprobe_zoffset);
 		// Call updatePID (similar to when we have processed M301)
 		updatePID();
