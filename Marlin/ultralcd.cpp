@@ -1531,7 +1531,7 @@ char *itostr31(const int &xx)
   return conv;
 }
 
-char *itostr3(const int &x)
+char *itostr3(const int &xx)
 {
   conv[0]=(xx>=0)?' ':'-';
   int xy=(xx>=0)?xx:-xx;

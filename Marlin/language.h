@@ -138,6 +138,7 @@
 #define MSG_ENDSTOPS_HIT "endstops hit: "
 #define MSG_ERR_COLD_EXTRUDE_STOP " cold extrusion prevented"
 #define MSG_ERR_LONG_EXTRUDE_STOP " too long extrusion prevented"
+#define MSG_ERR_ABORTED "Print manually aborted"
 #define MSG_BABYSTEPPING_X "Babystepping X"
 #define MSG_BABYSTEPPING_Y "Babystepping Y"
 #define MSG_BABYSTEPPING_Z "Babystepping Z"
